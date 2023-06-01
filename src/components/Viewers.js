@@ -5,23 +5,23 @@ const Viewers = () => {
   return (
     <Container>
         <Wrap>
-            <img src ="/" alt=""/>
+            <img src ="/images/viewers-disney.png" alt=""/>
         </Wrap>
 
         <Wrap>
-            <img src ="/" alt=""/>
+            <img src ="/images/viewers-marvel.png" alt=""/>
         </Wrap>
 
         <Wrap>
-            <img src ="/" alt=""/>
+            <img src ="/images/viewers-national.png" alt=""/>
         </Wrap>
 
         <Wrap>
-            <img src ="/" alt=""/>
+            <img src ="/images/viewers-pixar.png" alt=""/>
         </Wrap>
 
         <Wrap>
-            <img src ="/" alt=""/>
+            <img src ="/images/viewers-starwars.png" alt=""/>
         </Wrap>
     </Container>
   )
@@ -35,6 +35,7 @@ display:grid;
 padding:30px 0px 26px;
 grid-gap:25px;
 grid-template-columns:repeat(5, minmax(0,1fr));
+cursor:pointer;
 
 
 `
@@ -51,6 +52,7 @@ img{
     width:100%;
     height:100%;
     object-fit:cover;
+    
 
 }
 
@@ -58,6 +60,8 @@ img{
     box-shadow:rgb(0 0 0 /80%) 0px 40px 58px -16px, rgb(0 0 0/ 72%) 0px 30px 22px -10px;
     transform: scale(1.05);
     border-color: rgba(249, 249 249, 0.8);
+    cursor:pointer;
+    
 }
 
 `

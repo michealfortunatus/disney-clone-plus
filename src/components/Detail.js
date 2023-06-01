@@ -1,47 +1,71 @@
-import React from 'react';
+import React, { useEffect,useState } from 'react';
 import styled from 'styled-components';
+import{useParams} from "react-router-dom";
+import db from "../firebase"
 
 
 function Detail () {
+  const  {id} = useParams();
+  const [movie, setMovie] =useState()
+
+  useEffect(() =>{
+    db.collection("movies")
+    .doc(id)
+    .get()
+    .then((doc) =>{
+      if(doc.exists){
+         setMovie(doc.data());
+      }else{
+
+      }
+
+    })
+
+
+  }, [])
   return (
     <Container>
+      {movie &&(
+        <> 
         <Background>
-          <img src="/" alt=""/>
+          <img src={movie.backgroundImg} alt=""/>
         </Background>
 
         <ImageTitle>
-             <img src="/" alt=""/>
+             <img src={movie.titleImg} alt=""/>
         </ImageTitle>
 
         <Controls>
           <PlayButton>
-            <img src="/" alt=""/>
+            <img src="/images/play-icon-black.png" alt=""/>
             <span>PLAY</span>
 
           </PlayButton>
 
           <TrailerButton>
-             <img src="/" alt=""/>
+             <img src="/images/play-icon-white.png" alt=""/>
              <span>TRAILER</span>
           </TrailerButton>
 
           <AddButton>
-              <img src="" alt="" />
+              <span>+</span>
           </AddButton>
 
           <GroupWatchButton>
-            <img src="" alt="" />
+            <img src="/images/group-icon.png" alt="" />
 
           </GroupWatchButton>
                 
         </Controls>
         <SubTitle>
-           2023 . 7m . Family, Fantasy, Kids,Animation
+           {movie.SubTitle}
         </SubTitle>
 
         <Description>
-          loremipsum dolor sit amet, consectetur adipiscing
+          {movie.description}
         </Description>
+        </>
+        )}
     </Container>
   )
 }

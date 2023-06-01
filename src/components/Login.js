@@ -5,12 +5,12 @@ function Login() {
   return (
     <Container>
         <CTA>
-            <CTALogoOne src="" alt=""/>
+            <CTALogoOne src="/images/cta-logo-one.svg" alt=""/>
             <SignUp>
                 GET ALL THERE
             </SignUp>
             <Description> Get Premier Access to Raya and the Last Dragon for with a Disney+ subcription. The price and disney bundle will increase by $1.</Description>
-            <CTALogoTwo src="" alt=""/>
+            <CTALogoTwo src="/images/cta-logo-two.png" alt=""/>
 
                 
             
@@ -37,7 +37,7 @@ justify-content: center;
     bottom: 0;
     left:0;
     right: 0;
-    background-image: url("Images/");
+    background-image: url("images/login-background.jpg");
     background-position:top;
     background-size: cover;
     background-repeat: no-repeat;
