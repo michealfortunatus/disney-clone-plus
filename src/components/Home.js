@@ -1,52 +1,97 @@
-import React,{useEffect}  from 'react';
-import styled from 'styled-components';
-import ImageSlider from './ImageSlider';
-import Viewers from './Viewers';
-import Movies from './Movies';
-import db from '../firebase';
-import {useDispatch} from "react-redux";
-import { setMovies } from '../features/Movie/movieSlice';
 
-const Home = () => {
+
+import React, { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import styled from "styled-components";
+import db from "../firebase";
+import { setMovies } from "../features/Movie/movieSlice";
+import { selectUserName } from "../features/user/userSlice";
+import ImgSlider from "./ImgSlider";
+import NewDisney from "./NewDisney";
+import Originals from "./Originals";
+import Recommends from "./Recommends";
+import Trending from "./Trending";
+import Viewers from "./Viewers";
+import Footer from "./Footer";
+
+const Home = (props) => {
   const dispatch = useDispatch();
-    useEffect(() =>{
-     db.collection('movies').onSnapshot((snapshot) =>{
-        let tempMovies = snapshot.docs.map((doc) => {
-         return {id: doc.id, ...doc.data()}
-       })
-       dispatch(setMovies(tempMovies));
+  const userName = useSelector(selectUserName);
+  const recommends = useRef([]);
+  const newDisneys = useRef([]);
+  const originals = useRef([]);
+  const trending = useRef([]);
 
-      })
+  useEffect(() => {
+    console.log("hello");
+    db.collection("movies").onSnapshot((snapshot) => {
+      snapshot.docs.map((doc) => {
+        console.log(recommends.current);
+        switch (doc.data().type) {
+          case "recommend":
+            recommends.current = [...recommends.current, { id: doc.id, ...doc.data() }];
+            break;
 
+          case "new":
+            newDisneys.current = [...newDisneys.current, { id: doc.id, ...doc.data() }];
+            break;
 
-    },[dispatch])
+          case "original":
+            originals.current = [...originals.current, { id: doc.id, ...doc.data() }];
+            break;
+
+          case "trending":
+            trending.current = [...trending.current, { id: doc.id, ...doc.data() }];
+            break;
+
+          default:
+            break;
+        }
+        return null;
+      });
+
+      dispatch(
+        setMovies({
+          recommend: recommends.current,
+          newDisney: newDisneys.current,
+          original: originals.current,
+          trending: trending.current,
+        })
+      );
+    });
+  }, [userName, dispatch]);
+
   return (
     <Container>
-        <ImageSlider/>
-        <Viewers/>
-        <Movies/>
+      <ImgSlider />
+      <Viewers />
+      <Recommends />
+      <NewDisney />
+      <Originals />
+      <Trending />
+      <Footer />
     </Container>
-  )
-}
-
-export default Home
+  );
+};
 
 const Container = styled.main`
-min-height: calc(100vh - 70px);
-padding:0 calc (3.5vw + 5px );
-position:relative;
-overflow-x:hidden;
+  position: relative;
+  min-height: calc(100vh - 250px);
+  overflow-x: hidden;
+  display: block;
+  top: 72px;
+  padding: 0 calc(3.5vw + 5px);
 
-&:before{
-    background-image: url("/images/home-background.png") center center/ cover no-repeat fixed;
-    content:"";
-    position:absolute;
-    top:0;
-    left:0;
-    right:0;
-    bottom:0;
-    z-index:1;
-}
+  &:after {
+    background: url("/images/home-background.png") center center / cover no-repeat fixed;
+    content: "";
+    position: absolute;
+    inset: 0px;
+    opacity: 1;
+    z-index: -1;
+  }
+`;
+
+export default Home;
 
 
-`

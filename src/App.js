@@ -1,44 +1,10 @@
-// import React from 'react';
-// import Header from './components/Header';
-// import Home from './components/Home';
-// import {BrowserRouter as Router, Routes,Route} from "react-router-dom";
-// import Detail from './components/Detail';
 
-
-// // import{Counter} from './features/counter/Counter.js';
-// import './App.css';
-
-// function App() {
-
-//   return (
-//     <div className="App">
-//       <Router>
-//          <Header/>
-//          <Routes>
-//             <Route path="/Detail">
-//                <Detail/>
-//             </Route>
-//             <Route path="/">
-//                <Home/>
-//             </Route>
-//          </Routes>
-//       </Router>
-         
-         
-        
-    
-//     </div>
-//   );
-// }
-
-// export default App;
-
-import React from 'react';
-import Header from './components/Header';
-import Home from './components/Home';
-import Login from './components/Login';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Detail from './components/Detail';
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Login from "./components/Login";
+import Header from "./components/Header";
+import "./App.css";
+import Home from "./components/Home";
+import Detail from "./components/Detail";
 
 function App() {
   return (
@@ -46,11 +12,9 @@ function App() {
       <Router>
         <Header />
         <Routes>
-          <Route path="/detail/:id" element={<Detail />} />
-          <Route path="/" element={<Home />} />
-          <Route path="/login" element={<Login />} />
-
-          
+           <Route path="/" element={<Login />} />
+           <Route path="/home" element={<Home />} />           
+          <Route path="/detail/:id" element={<Detail />} />          
         </Routes>
       </Router>
     </div>
@@ -58,4 +22,5 @@ function App() {
 }
 
 export default App;
+
 

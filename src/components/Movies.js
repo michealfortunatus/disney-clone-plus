@@ -30,6 +30,7 @@ export default Movies
 
 const Container = styled.div`
 
+
  
 `
 
