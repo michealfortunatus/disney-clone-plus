@@ -1,5 +1,7 @@
 # Getting Started with Create React App
 
+![disney img](https://github.com/michealfortunatus/disney-clone-plus/assets/103397083/b353d026-eee3-4482-b86d-84ba978463a9)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
